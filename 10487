@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+int cmp(const void* a, const void* b);
+int binsearch(int key, int min, int max);
+int c[500000];
+int main()
+{
+    int tcase = 0, n, num[1001], m, q[25], i, j, cnt, sum;
+    while(scanf("%d", &n) != EOF)
+    {
+        if(!n)
+            break;
+        tcase++;
+        printf("Case %d:\n", tcase);
+        memset(num, 0, sizeof(int));
+        memset(c, 0, sizeof(int));
+        memset(q, 0, sizeof(int));
+        for(i=0; i<n; i++)
+        {
+            scanf("%d", &num[i]);
+        }
+        for(i=0, cnt=0; i<n; i++)
+        {
+            for(j=i+1; j<n; j++)
+            {
+                c[cnt] = num[i]+num[j];
+                cnt++;
+            }
+        }
+        qsort(c, cnt, sizeof(int), cmp);
+        scanf("%d", &m);
+        for(i=0; i<m; i++)
+        {
+            scanf("%d", &q[i]);
+            sum = binsearch(q[i], 0, cnt-1);
+            printf("Closest sum to %d is %d.\n", q[i], sum);
+        }
+    }
+    return 0;
+}
+int cmp(const void* a, const void* b)
+{
+    return (*(int*)a-*(int*)b);
+}
+int binsearch(int key, int min, int max)
+{
+    int mid= (min+max)/2, prev=0, diff = 2147483647;
+    while(min < max)
+    {
+
+        if(c[mid] == key)
+            return c[mid];
+        else if(c[mid] > key)
+            max = mid;
+        else
+            min = mid+1;
+        if(diff > abs(key-c[mid]))
+        {
+            diff = abs(key-c[mid]);
+            /*printf("%d %d, %d %d, %d %d, d=%d p=%d\n", min, c[min], mid, c[mid], max, c[max], diff, prev);*/
+        }
+        else
+        {
+            /*printf("here %d %d, %d %d, %d %d, d=%d p=%d\n", min, c[min], mid, c[mid], max, c[max], diff, prev);*/
+            return c[prev];
+        }
+        prev = mid;
+        mid = (min+max)/2;
+
+    }
+    return c[mid];
+}
