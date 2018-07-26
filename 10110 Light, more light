@@ -1,0 +1,25 @@
+#include<stdio.h>
+#include<math.h>
+int main()
+{
+    unsigned long n, t;
+    int light;
+
+    while(scanf("%lu", &n)!=EOF)
+    {
+        if(!n)
+            break;
+
+        t=(int)sqrt(n);
+        if(n==t*t)
+            light=1;
+        else
+            light=0;
+
+        if(!light)
+            printf("no\n");
+        else
+            printf("yes\n");
+    }
+    return 0;
+}
