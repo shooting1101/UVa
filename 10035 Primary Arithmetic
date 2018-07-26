@@ -1,0 +1,43 @@
+#include<stdio.h>
+int main()
+{
+    unsigned long x, y, b;
+    int time, carry;
+
+    while(scanf("%lu %lu", &x, &y)==2)
+    {
+        if(!x&&!y)
+            break;
+
+        time=0;
+        carry=0;
+        if(x>=y)
+            b=x;
+        else
+            b=y;
+        while(b>0)
+        {
+            if(x%10+y%10+carry>9)
+            {
+                time++;
+                carry=1;
+            }
+            else
+                carry=0;
+
+            x/=10;
+            y/=10;
+            if(x>=y)
+                b=x;
+            else
+                b=y;
+        }
+        if(!time)
+            printf("No carry operation.\n");
+        else if(time==1)
+            printf("1 carry operation.\n");
+        else
+            printf("%d carry operations.\n", time);
+    }
+    return 0;
+}
