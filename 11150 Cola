@@ -1,0 +1,10 @@
+#include<stdio.h>
+int main()
+{
+    int a;
+    while(scanf("%d", &a)!=EOF)
+    {
+        printf("%d\n", a*3/2);  //利用"整數除以整數會自動捨去小數"即可省掉if else
+    }
+    return 0;
+}
