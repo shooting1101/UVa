@@ -1,0 +1,59 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+int d=1;
+void recr(int k)
+{
+    int sum=0, i, t;
+    t=ceil(log10(k));
+
+    if(k>9)
+    {
+        for(i=0; i<t; i++)
+        {
+            sum += k%10;
+            k/=10;
+        }
+
+        if(sum%9==0)
+        {
+            d++;
+            recr(sum);
+        }
+    }
+}
+int main()
+{
+    char n[1002];
+    int len, i, sum;
+
+    scanf("%s", n);
+    while(strcmp(n,"0")!=0)
+    {
+        sum=0;
+        len=strlen(n);
+
+        for(i=0; i<len; i++)
+        {
+            sum += n[i]-48;
+        }
+
+        if(sum%9==0)
+            recr(sum);
+        else
+            d=0;
+
+        if(d>0)
+            printf("%s is a multiple of 9 and has 9-degree %d.\n", n, d);
+        else
+            printf("%s is not a multiple of 9.\n", n);
+
+        for(i=0; i<len; i++)
+        {
+            n[i]=0;
+        }
+        d=1;
+        scanf("%s", n);
+    }
+    return 0;
+}
