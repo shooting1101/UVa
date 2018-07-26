@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int tcase, i, len, count, sum;
+    char str[80];
+    scanf("%d", &tcase);
+    while(tcase--)
+    {
+        count=0;
+        sum=0;
+        scanf("%s", str);
+        len=strlen(str);
+        for(i=0;i<len;i++){
+            if(str[i]=='O'){
+                count++;
+                sum+=count;
+            }
+            else
+                count=0;
+        }
+        printf("%d\n", sum);
+        for(i=0;i<len;i++)
+            str[i]=0;
+    }
+    return 0;
+}
