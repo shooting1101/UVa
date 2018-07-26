@@ -1,0 +1,68 @@
+#include<stdio.h>
+int main()
+{
+    int tc=0, n, m, i, j, result[103][103]= {0};
+    char matrix[103][103];
+
+    scanf("%d %d", &n, &m);
+    while(n&&m)
+    {
+        tc++;
+        for(i=1; i<=n; i++)
+        {
+            for(j=1; j<=m; j++)
+            {
+                scanf(" %c", &matrix[i][j]);
+            }
+        }
+
+        for(i=1; i<=n; i++)
+        {
+            for(j=1; j<=m; j++)
+            {
+                if(matrix[i][j]=='*')
+                {
+                    result[i][j]=20000;
+                    result[i][j+1]++;
+                    result[i][j-1]++;
+                    result[i+1][j]++;
+                    result[i-1][j]++;
+                    result[i+1][j+1]++;
+                    result[i-1][j-1]++;
+                    result[i+1][j-1]++;
+                    result[i-1][j+1]++;
+                }
+            }
+        }
+
+        if(tc!=1)
+            printf("\nField #%d:\n", tc);
+        else
+            printf("Field #%d:\n", tc);
+
+        for(i=1; i<=n; i++)
+        {
+            for(j=1; j<=m; j++)
+            {
+                if(result[i][j]>15000)
+                    printf("*");
+                else
+                    printf("%d", result[i][j]);
+            }
+            printf("\n");
+        }
+
+
+        for(i=0; i<=n+1; i++)   /*要注意邊界要多歸零一列一行*/
+        {
+            for(j=0; j<=m+1; j++)
+            {
+                matrix[i][j]='.';
+                result[i][j]=0;
+            }
+        }
+
+        scanf("%d %d", &n, &m);
+    }
+    return 0;
+}
