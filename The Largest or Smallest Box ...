@@ -1,0 +1,22 @@
+#include<stdio.h>
+#include<math.h>
+#define EPSILON (1E-7)
+int main()
+{
+    double l, w, max, min, t;
+    while(scanf("%lf %lf", &l,&w)==2)
+    {
+        t=sqrt(l*l+w*w-l*w);
+        if(l+w>t)
+            max=(l+w-t)/6+EPSILON;
+        else
+            max=(l+w+t)/6+EPSILON;
+        if(l>=w)
+            min=w/2+EPSILON;
+        else
+            min=l/2+EPSILON;
+        printf("%.3f 0.000 %.3f\n", max, min);
+    }
+
+    return 0;
+}
