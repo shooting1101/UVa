@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+int de(int num, int power)
+{
+    int i;
+    for(i=0; i<power; i++)
+    {
+        if(num>1000)
+            num=num%1000;
+        num*=num;
+    }
+    if(num>1000)
+        num=num%1000;
+
+    return num;
+}
+int main()
+{
+    int tc, n, t=0, d, k, l, r;
+    double a;
+
+    scanf("%d", &tc);
+    while(tc--)
+    {
+        scanf("%d %d", &n, &k);
+
+        a=k*log10(n);       /*x=n^k =>a=lg x=k*lg n*/
+        a -= floor(a);      /*剩下小數點後面部分 因影響10^y結果的只有y的小數部分*/
+        a=floor(a*1000000);   /*弄成萬位後利用floor去掉多餘的小數*/
+        l=100*pow(10, a/1000000); /*變回小數再做次方=去掉log*/
+
+        r=1;
+        d=0;                /*從個位數開始*/
+        while(k>0)          /*k/2到最後會是0*/
+        {
+            if(k%2!=0)      /*把k換成二進位 %2有餘數則表示在d位數時二進位是1*/
+            {
+                if(r>1000)
+                    r=r%1000;
+
+                r*=de(n, d);  /*因為k可分解成2的次方的倍數的和 r=(1||0)n^0*(1||0)n^1*... */
+            }
+            k/=2;
+            d++;            /*接著看下一位數*/
+        }
+
+        printf("%d...%03d\n", l, r%1000);
+    }
+    return 0;
+}
