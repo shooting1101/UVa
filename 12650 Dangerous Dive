@@ -1,0 +1,41 @@
+#include<stdio.h>
+#include<stdlib.h>
+int cmp(const void*a, const void*b)
+{
+    return *(int*)a-*(int*)b;
+}
+int main()
+{
+    int n, r, alive[10002], i, j;
+
+    while(scanf("%d %d", &n, &r)==2)
+    {
+        for(i=0; i<r; i++)
+        {
+            scanf("%d", &alive[i]);
+        }
+        qsort(alive, r, sizeof(int), cmp);
+
+        i=1, j=0;
+        if(n!=r)
+        {
+            while(i<=n)
+            {
+                if(alive[j]==i)
+                    j++;
+                else
+                    printf("%d ", i);
+                i++;
+            }
+            printf("\n");
+        }
+        else
+            printf("*\n");
+
+        for(i=0; i<r; i++)
+        {
+            alive[i]=0;
+        }
+    }
+    return 0;
+}
