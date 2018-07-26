@@ -1,0 +1,18 @@
+#include<stdio.h>
+int main()
+{
+    int n, f, area, num, level, money=0;
+    scanf("%d", &n);
+    while(n--)
+    {
+        scanf("%d", &f);
+        while(f--){
+            scanf("%d %d %d", &area, &num, &level);
+            money+=area*level;
+        }
+        printf("%d\n", money);
+
+        money=0;
+    }
+    return 0;
+}
