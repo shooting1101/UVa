@@ -1,0 +1,24 @@
+#include<stdio.h>
+int main()
+{
+    int h, m, i;
+    float deg=0;
+
+    while(scanf("%d:%d", &h, &m)==2)
+    {
+        if(h==0&&m==0)
+            break;
+
+        if(30*h>=5.5*m)
+            deg=30*h-5.5*m;
+        else
+            deg=5.5*m-30*h;
+
+        if(deg>=180)
+            deg=360-deg;
+
+        printf("%.3f\n", deg);
+    }
+
+    return 0;
+}
